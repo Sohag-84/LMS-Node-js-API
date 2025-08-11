@@ -61,4 +61,28 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-module.exports = { addCategory, getAllCategories };
+const deleteCategory = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    const category = await Category.findByIdAndDelete(categoryId);
+    if (category) {
+      return res.status(200).json({
+        success: true,
+        message: "Category has been deleted",
+        data: category,
+      });
+    }
+    res.status(400).json({
+      success: false,
+      message: "Category not found",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong!",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { addCategory, getAllCategories, deleteCategory };
