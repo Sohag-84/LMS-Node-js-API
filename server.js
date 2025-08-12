@@ -8,6 +8,7 @@ const authRoutes = require("./routes/auth-routes");
 const userRoutes = require("./routes/user-routes");
 const categoryRoutes = require("./routes/category-routes");
 const courseRoutes = require("./routes/course-routes");
+const coursePurchaseRoutes = require("./routes/course-purchase-routes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -37,6 +38,9 @@ app.use("/api/category", categoryRoutes);
 
 //course route
 app.use("/api/course", courseRoutes);
+
+//course purchase route
+app.use("/api/course/", coursePurchaseRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is now running on port ${PORT}`);
