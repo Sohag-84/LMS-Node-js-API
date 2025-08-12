@@ -5,7 +5,7 @@ const getAllUsers = async (req, res) => {
     const users = await User.find({});
     res.status(200).json({
       success: true,
-      message: "Course retrieved successfully",
+      message: "Users retrieved successfully",
       data: users,
     });
   } catch (error) {

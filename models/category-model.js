@@ -4,17 +4,17 @@ const CategorySchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
       trim: true,
     },
     slug: {
       type: String,
-      require: true,
+      required: true,
       trim: true,
     },
     image: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   { timestamps: true }

@@ -1,4 +1,3 @@
-const { text } = require("express");
 const mongoose = require("mongoose");
 
 const VideoSchema = new mongoose.Schema({
@@ -11,19 +10,19 @@ const CourseSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
       text: true,
     },
     description: String,
     teacher: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      require: true,
+      required: true,
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
-      require: true,
+      required: true,
     },
     videos: [VideoSchema],
     price: {
