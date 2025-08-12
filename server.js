@@ -5,6 +5,7 @@ const cors = require("cors");
 const connectToDB = require("./database/db");
 
 const authRoutes = require("./routes/auth-routes");
+const userRoutes = require("./routes/user-routes");
 const categoryRoutes = require("./routes/category-routes");
 const courseRoutes = require("./routes/course-routes");
 
@@ -28,10 +29,13 @@ app.get("/", (req, res) => {
 //auth routes
 app.use("/api/auth", authRoutes);
 
+//user route
+app.use("/api/user", userRoutes);
+
 //category routes
 app.use("/api/category", categoryRoutes);
 
-//course route 
+//course route
 app.use("/api/course", courseRoutes);
 
 app.listen(PORT, () => {
