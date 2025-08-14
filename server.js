@@ -9,6 +9,7 @@ const userRoutes = require("./routes/user-routes");
 const categoryRoutes = require("./routes/category-routes");
 const courseRoutes = require("./routes/course-routes");
 const coursePurchaseRoutes = require("./routes/course-purchase-routes");
+const courseReviewRoutes = require("./routes/review-routes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -41,6 +42,9 @@ app.use("/api/course", courseRoutes);
 
 //course purchase route
 app.use("/api/course/", coursePurchaseRoutes);
+
+//course review route
+app.use("/api/course", courseReviewRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is now running on port ${PORT}`);

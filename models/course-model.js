@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const Review = require("../models/review-model");
+
 const VideoSchema = new mongoose.Schema({
   title: String,
   url: String,
@@ -29,6 +31,7 @@ const CourseSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    reviews: [Review],
   },
   { timestamps: true }
 );
