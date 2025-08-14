@@ -7,6 +7,7 @@ const {
   getAllCourses,
   updateCourse,
   deleteCourse,
+  updateCourseVideos,
 } = require("../controllers/course-controller");
 
 const router = express.Router();
@@ -15,5 +16,11 @@ router.post("/add", authMiddleware, teacherMiddleware, addCourse);
 router.get("/get", getAllCourses);
 router.post("/update/:id", authMiddleware, teacherMiddleware, updateCourse);
 router.post("/delete/:id", authMiddleware, teacherMiddleware, deleteCourse);
+router.post(
+  "/videos/:id",
+  authMiddleware,
+  teacherMiddleware,
+  updateCourseVideos
+);
 
 module.exports = router;

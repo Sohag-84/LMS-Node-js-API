@@ -196,4 +196,67 @@ const deleteCourse = async (req, res) => {
   }
 };
 
-module.exports = { addCourse, getAllCourses, updateCourse, deleteCourse };
+const updateCourseVideos = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { videos } = req.body;
+
+    //find the course
+    const course = await Course.findById(id);
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found",
+      });
+    }
+
+    // If Teacher but not the owner
+    if (
+      req.userInfo.role === "teacher" &&
+      course.teacher.toString() !== req.userInfo.userId
+    ) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not allowed to update another teacher's course",
+      });
+    }
+
+    if (!Array.isArray(videos)) {
+      return res.status(400).json({
+        success: false,
+        message: "Videos must be an array",
+      });
+    }
+    // Sort and reassign order to avoid duplicates/gaps
+    const orderedVideos = videos
+      .sort((a, b) => (a.order || 0) - (b.order || 0))
+      .map((video, index) => ({
+        title: video.title,
+        url: video.url,
+        order: index + 1,
+      }));
+
+    course.videos = orderedVideos;
+    await course.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Course videos updated successfully",
+      videos: course.videos,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong!",
+      error: error.message,
+    });
+  }
+};
+
+module.exports = {
+  addCourse,
+  getAllCourses,
+  updateCourse,
+  deleteCourse,
+  updateCourseVideos,
+};
