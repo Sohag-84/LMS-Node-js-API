@@ -67,7 +67,7 @@ cd LMS-Node-js-API
 npm install
 
 # Create an environment file
-cp .env.example .env
+cp .env
 
 # Run the server
 npm run dev
